@@ -1,0 +1,75 @@
+form.dashboard-widget-yrz_status_history .fields-group:not(.fields-group-thresholds) {
+  display: grid;
+  grid-template-columns: minmax(150px, max-content) auto;
+  align-items: center;
+  column-gap: 10px;
+  row-gap: 5px;
+}
+form.dashboard-widget-yrz_status_history .fields-group:not(.fields-group-thresholds) hr {
+  grid-column: 1 / -1;
+  margin: 0;
+  width: 100%;
+  border: solid #383838;
+  border-width: 1px 0 0 0;
+}
+
+
+div.dashboard-widget-yrz_status_history .main-container {
+  display: flex;
+  padding: 0 10px;
+}
+
+div.dashboard-widget-yrz_status_history .label-container {
+  display: grid;
+  white-space: nowrap;
+  padding-right: 10px;
+}
+div.dashboard-widget-yrz_status_history .label-item {
+  display: flex;
+  align-items: center;
+}
+div.dashboard-widget-yrz_status_history .label-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+div.dashboard-widget-yrz_status_history .history-container {
+  display: grid;
+}
+div.dashboard-widget-yrz_status_history .history-item {
+  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  align-items: center;
+  direction: ltr;
+}
+div.dashboard-widget-yrz_status_history .history-item span {
+  mix-blend-mode: difference;
+}
+
+div.dashboard-widget-yrz_status_history .date-item {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  padding-top: 15px;
+  writing-mode: vertical-lr;
+  direction: ltr;
+}
+
+div.dashboard-widget-yrz_status_history .legend-container {
+  display: flex;
+  height: 10px;
+  padding: 20px 10px 0 10px;
+}
+div.dashboard-widget-yrz_status_history .legend-item {
+  display: flex;
+  align-items: center;
+  width: auto;
+  margin-right: 20px;
+}
+div.dashboard-widget-yrz_status_history .legend-color {
+  width: 30px;
+  height: 10px;
+  border-radius: 10px;
+  margin-right: 5px;
+}
