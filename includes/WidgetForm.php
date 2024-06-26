@@ -13,7 +13,8 @@ use Zabbix\Widgets\Fields\{
   CWidgetFieldIntegerBox,
   CWidgetFieldMultiSelectItem,
   CWidgetFieldRadioButtonList,
-  CWidgetFieldSelect
+  CWidgetFieldSelect,
+  CWidgetFieldTextBox
 };
 
 use Modules\YrzStatusHistory\{
@@ -34,7 +35,8 @@ class WidgetForm extends CWidgetForm {
   private const DEFAULT_GAP_HORIZONTAL = 2;
   private const DEFAULT_GAP_VERTICAL = 2;
   private const DEFAULT_LABEL_WIDTH = 0;
-  private const DEFAULT_VALUE_ROUND = 2;
+  private const DEFAULT_VALUE_EMPTY_TEXT = 'N/A';
+  private const DEFAULT_VALUE_DIGITS = 2;
 
   public function addFields(): self {
     return $this
@@ -118,8 +120,16 @@ class WidgetForm extends CWidgetForm {
           ->setDefault(Widget::YRZ_SH_OFF)
       )
       ->addField(
-        (new CWidgetFieldIntegerBox('value_round', _('Round value')))
-          ->setDefault(self::DEFAULT_VALUE_ROUND)
+        (new CWidgetFieldCheckBox('value_empty_show', _('Text if no value')))
+          ->setDefault(Widget::YRZ_SH_OFF)
+      )
+      ->addField(
+        (new CWidgetFieldTextBox('value_empty_text', ''))
+          ->setDefault(self::DEFAULT_VALUE_EMPTY_TEXT)
+      )
+      ->addField(
+        (new CWidgetFieldIntegerBox('value_digits', _('Fraction digits')))
+          ->setDefault(self::DEFAULT_VALUE_DIGITS)
       )
       ->addField(
         (new CWidgetFieldRadioButtonList('cell_align', _('Alignment'), [

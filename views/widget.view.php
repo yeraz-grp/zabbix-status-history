@@ -63,13 +63,13 @@ foreach ($data['items'] as $item) {
   # History status
   for ($i = 0; $i < $data['num_days']; $i++) {
     $columnDate = date('Y-m-d', time() - $i * (60 * 60 * 24));
-    $statusValue = 'N/A';
+    $statusValue = $data['value_empty_show'] == Widget::YRZ_SH_ON ? $data['value_empty_text'] : '';
     $statusColor = $data['base_color'];
 
     foreach ($item as $itemStatus) {
       if (isset($itemStatus['day'])) {
         if ($itemStatus['day'] == $columnDate) {
-          $statusValue = round(floatval($itemStatus['value']), $data['value_round']);
+          $statusValue = round(floatval($itemStatus['value']), $data['value_digits']);
           $lastThreshold = null;
           foreach ($data['thresholds'] as $threshold) {
             if ($itemStatus['value'] == $threshold['threshold'] || (

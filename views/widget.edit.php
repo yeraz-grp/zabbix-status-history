@@ -4,6 +4,16 @@ use Modules\YrzStatusHistory\CWidgetFieldYrzShThresholdsView;
 
 $form = new CWidgetFormView($data);
 
+$cell_width_field = $form->registerField(new CWidgetFieldIntegerBoxView($data['fields']['cell_width']));
+$cell_height_field = $form->registerField(new CWidgetFieldIntegerBoxView($data['fields']['cell_height']));
+$gap_horizontal_field = $form->registerField(new CWidgetFieldIntegerBoxView($data['fields']['gap_horizontal']));
+$gap_vertical_field = $form->registerField(new CWidgetFieldIntegerBoxView($data['fields']['gap_vertical']));
+$label_width_field = $form->registerField(new CWidgetFieldIntegerBoxView($data['fields']['label_width']))
+  ->setFieldHint(makeWarningIcon(_('If set to 0, the width will be set on auto.')));
+$value_empty_checkbox = $form->registerField(new CWidgetFieldCheckBoxView($data['fields']['value_empty_show']));
+$value_empty_field = $form->registerField(new CWidgetFieldTextBoxView($data['fields']['value_empty_text']))
+  ->setWidth(ZBX_TEXTAREA_SMALL_WIDTH);
+
 $form
   ->addField(
     new CWidgetFieldMultiSelectItemView($data['fields']['itemid'])
@@ -27,18 +37,22 @@ $form
   )
   ->addFieldset(
 		(new CWidgetFormFieldsetCollapsibleView(_('Advanced configuration')))
-      ->addField(
-        new CWidgetFieldIntegerBoxView($data['fields']['cell_width'])
-      )
-      ->addField(
-        new CWidgetFieldIntegerBoxView($data['fields']['cell_height'])
-      )
-      ->addField(
-        new CWidgetFieldIntegerBoxView($data['fields']['gap_horizontal'])
-      )
-      ->addField(
-        new CWidgetFieldIntegerBoxView($data['fields']['gap_vertical'])
-      )
+      ->addItem([
+        $cell_width_field->getLabel(),
+        (new CFormField([$cell_width_field->getView(), ' px']))
+      ])
+      ->addItem([
+        $cell_height_field->getLabel(),
+        (new CFormField([$cell_height_field->getView(), ' px']))
+      ])
+      ->addItem([
+        $gap_horizontal_field->getLabel(),
+        (new CFormField([$gap_horizontal_field->getView(), ' px']))
+      ])
+      ->addItem([
+        $gap_vertical_field->getLabel(),
+        (new CFormField([$gap_vertical_field->getView(), ' px']))
+      ])
       ->addFieldsGroup(
         (new CWidgetFieldsGroupView(_('Labels')))
           ->addClass('fields-group-label')
@@ -48,12 +62,10 @@ $form
           ->addField(
             new CWidgetFieldRadioButtonListView($data['fields']['label_align'])
           )
-          ->addField(
-            (new CWidgetFieldIntegerBoxView($data['fields']['label_width']))
-            ->setFieldHint(
-              makeWarningIcon(_('If set to 0, the width will be set on auto.'))
-            )
-          )
+          ->addItem([
+            $label_width_field->getLabel(),
+            (new CFormField([$label_width_field->getView(), ' px']))
+          ])
       )
       ->addFieldsGroup(
         (new CWidgetFieldsGroupView(_('Status cells')))
@@ -70,8 +82,12 @@ $form
           ->addField(
             new CWidgetFieldCheckBoxView($data['fields']['show_value'])
           )
+          ->addItem([
+            $value_empty_checkbox->getLabel(),
+            (new CFormField([$value_empty_checkbox->getView(), $value_empty_field->getView()]))
+          ])
           ->addField(
-            new CWidgetFieldIntegerBoxView($data['fields']['value_round'])
+            new CWidgetFieldIntegerBoxView($data['fields']['value_digits'])
           )
           ->addField(
             new CWidgetFieldRadioButtonListView($data['fields']['cell_align'])
@@ -99,7 +115,7 @@ $form
             (new CWidgetFieldCheckBoxView($data['fields']['color_interpolation']))
             ->setFieldHint(
               makeWarningIcon(_('If activated, it replace the color interval with'
-              .'a color interpolation between the two thresholds colors.'))
+              .' a color interpolation between the two thresholds colors.'))
             )
           )
           ->addField(

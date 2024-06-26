@@ -9,7 +9,9 @@ window.widget_yrz_status_history_form = new class {
     this._showLabel = document.getElementById('show_label');
     this._labelWidth = document.getElementById('label_width');
     this._showValue = document.getElementById('show_value');
-    this._valueRound = document.getElementById('value_round');
+    this._valueEmptyShow = document.getElementById('value_empty_show');
+    this._valueEmptyText = document.getElementById('value_empty_text');
+    this._valueDigits = document.getElementById('value_digits');
     this._showDate = document.getElementById('show_date');
     this._colorInterval = document.getElementById('color_interval');
     this._colorInterpolation = document.getElementById('color_interpolation');
@@ -17,6 +19,7 @@ window.widget_yrz_status_history_form = new class {
 
     this._showLabel.addEventListener('change', () => this.updateForm());
     this._showValue.addEventListener('change', () => this.updateForm());
+    this._valueEmptyShow.addEventListener('change', () => this.updateForm());
     this._showDate.addEventListener('change', () => this.updateForm());
     this._colorInterval.addEventListener('change', () => this.updateForm());
     this._showLegend.addEventListener('change', () => this.updateForm());
@@ -78,7 +81,10 @@ window.widget_yrz_status_history_form = new class {
     for (const cellAlignButtons of document.querySelectorAll('#cell_align input')) {
       cellAlignButtons.disabled = !this._showValue.checked;
     }
-    this._valueRound.disabled = !this._showValue.checked;
+    this._valueEmptyShow.disabled = !this._showValue.checked;
+    this._valueDigits.disabled = !this._showValue.checked;
+
+    this._valueEmptyText.disabled = !this._showValue.checked || !this._valueEmptyShow.checked;
 
     for (const dateFormatButtons of document.querySelectorAll('#date_format input')) {
       dateFormatButtons.disabled = !this._showDate.checked;
