@@ -13,11 +13,13 @@ use Zabbix\Widgets\Fields\{
   CWidgetFieldIntegerBox,
   CWidgetFieldMultiSelectItem,
   CWidgetFieldRadioButtonList,
-  CWidgetFieldSelect,
-  CWidgetFieldThresholds
+  CWidgetFieldSelect
 };
 
-use Modules\YrzStatusHistory\Widget;
+use Modules\YrzStatusHistory\{
+  Widget,
+  CWidgetFieldYrzShThresholds
+};
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
@@ -60,7 +62,7 @@ class WidgetForm extends CWidgetForm {
 					->setDefault(self::DEFAULT_BASE_COLOR)
 			)
       ->addField(
-        new CWidgetFieldThresholds('thresholds', _('Thresholds'))
+        new CWidgetFieldYrzShThresholds('thresholds', _('Thresholds'))
       )
       ->addField(
         (new CWidgetFieldIntegerBox('cell_width', _('Cells width')))

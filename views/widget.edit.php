@@ -1,5 +1,7 @@
 <?php
 
+use Modules\YrzStatusHistory\CWidgetFieldYrzShThresholdsView;
+
 $form = new CWidgetFormView($data);
 
 $form
@@ -19,7 +21,7 @@ $form
     (new CWidgetFieldsGroupView(_('Thresholds')))
       ->addClass('fields-group-thresholds')
       ->addField(
-        (new CWidgetFieldThresholdsView($data['fields']['thresholds']))
+        (new CWidgetFieldYrzShThresholdsView($data['fields']['thresholds']))
           ->removeLabel()
       )
   )
@@ -61,6 +63,9 @@ $form
           )
           ->addField(
             new CWidgetFieldRadioButtonListView($data['fields']['cell_order'])
+          )
+          ->addItem(
+            new CTag('hr')
           )
           ->addField(
             new CWidgetFieldCheckBoxView($data['fields']['show_value'])

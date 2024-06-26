@@ -4,7 +4,7 @@ use Modules\YrzStatusHistory\Widget;
 
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-//die('ded');
+// die('ded');
 
 # Setting values
 $cellWidth = $data['cell_width'].'px';
@@ -19,6 +19,8 @@ $cellOrder = $data['cell_order'] == Widget::YRZ_SH_CELL_ORDER_NEWEST ? 'ltr' : '
 $cellAlign = $data['cell_align'] == Widget::YRZ_SH_CELL_ALIGN_LEFT ? 'start' : (
   $data['cell_align'] == Widget::YRZ_SH_CELL_ALIGN_RIGHT ? 'end' : 'center'
 );
+
+$valueDisplay = $data['show_value'] == Widget::YRZ_SH_ON ? 'unset' : 'none'; 
 
 $legendLayout = $data['legend_layout'] == Widget::YRZ_SH_LEGEND_LAYOUT_LIST ? 'row' : 'column';
 
@@ -61,15 +63,13 @@ foreach ($data['items'] as $item) {
   # History status
   for ($i = 0; $i < $data['num_days']; $i++) {
     $columnDate = date('Y-m-d', time() - $i * (60 * 60 * 24));
-    $statusValue = $data['show_value'] == Widget::YRZ_SH_ON ? 'N/A' : '';
+    $statusValue = 'N/A';
     $statusColor = $data['base_color'];
 
     foreach ($item as $itemStatus) {
       if (isset($itemStatus['day'])) {
         if ($itemStatus['day'] == $columnDate) {
-          if ($data['show_value'] == Widget::YRZ_SH_ON) {
-            $statusValue = round(floatval($itemStatus['value']), $data['value_round']);
-          }
+          $statusValue = round(floatval($itemStatus['value']), $data['value_round']);
           $lastThreshold = null;
           foreach ($data['thresholds'] as $threshold) {
             if ($itemStatus['value'] == $threshold['threshold'] || (
@@ -77,6 +77,7 @@ foreach ($data['items'] as $item) {
             $lastThreshold === null && $itemStatus['value'] < $threshold['threshold']
             )) {
               $statusColor = $threshold['color'];
+              $statusValue = $threshold['text'] == '' ? $statusValue : $threshold['text'];
             }
             else if ($data['color_interval'] == Widget::YRZ_SH_ON AND $lastThreshold !== null AND
             $lastThreshold['threshold'] < $itemStatus['value'] &&
@@ -100,6 +101,7 @@ foreach ($data['items'] as $item) {
     $historyContainer->addItem(
       (new CDiv(
         (new CSpan($statusValue))
+          ->addStyle('display: '.$valueDisplay)
       ))
         ->addClass('history-item')
         ->addStyle('height: '.$cellHeight.'; justify-content: '.$cellAlign.'; background-color: #'.$statusColor.';')
@@ -139,8 +141,10 @@ foreach ($data['thresholds'] as $threshold) {
       ->addClass('legend-color')
       ->addStyle('background-color: #'.$threshold['color'])
   );
+
+  $legendText = $threshold['text'] == '' ? $threshold['threshold'] : $threshold['text'];
   $legendItem->addItem(
-    (new CDiv($threshold['threshold']))
+    (new CDiv($legendText))
       ->addClass('legend-text')
   );
 
