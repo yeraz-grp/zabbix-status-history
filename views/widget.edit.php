@@ -4,6 +4,8 @@ use Modules\YrzStatusHistory\CWidgetFieldYrzShThresholdsView;
 
 $form = new CWidgetFormView($data);
 
+$num_cells_field = $form->registerField(new CWidgetFieldIntegerBoxView($data['fields']['num_cells']));
+$search_interval_select = $form->registerField(new CWidgetFieldSelectView($data['fields']['search_interval']));
 $cell_width_field = $form->registerField(new CWidgetFieldIntegerBoxView($data['fields']['cell_width']));
 $cell_height_field = $form->registerField(new CWidgetFieldIntegerBoxView($data['fields']['cell_height']));
 $gap_horizontal_field = $form->registerField(new CWidgetFieldIntegerBoxView($data['fields']['gap_horizontal']));
@@ -18,9 +20,10 @@ $form
   ->addField(
     new CWidgetFieldMultiSelectItemView($data['fields']['itemid'])
   )
-  ->addField(
-    new CWidgetFieldIntegerBoxView($data['fields']['num_days'])
-  )
+  ->addItem([
+    $num_cells_field->getLabel(),
+    (new CFormField([$num_cells_field->getView(), ' '._('with an interval of').' ', $search_interval_select->getView()]))
+  ])
   ->addField(
     new CWidgetFieldSelectView($data['fields']['agg_func'])
   )
@@ -96,11 +99,9 @@ $form
             new CTag('hr')
           )
           ->addField(
-            new CWidgetFieldCheckBoxView($data['fields']['show_date'])
+            new CWidgetFieldRadioButtonListView($data['fields']['show_date'])
           )
-          ->addField(
-            new CWidgetFieldRadioButtonListView($data['fields']['date_format'])
-          )
+          // Date format?
           ->addItem(
             new CTag('hr')
           )

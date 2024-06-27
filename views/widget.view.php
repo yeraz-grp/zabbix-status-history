@@ -39,7 +39,7 @@ $labelContainer = (new CDiv())
   );
 $historyContainer = (new CDiv())
   ->addClass('history-container')
-  ->addStyle('grid-template-columns: repeat('.$data['num_days'].', '.
+  ->addStyle('grid-template-columns: repeat('.$data['num_cells'].', '.
   $cellWidth.'); gap: '.$gap.'; direction: '.$cellOrder.';'
   );
 $legendContainer = (new CDiv())
@@ -61,14 +61,17 @@ foreach ($data['items'] as $item) {
   }
 
   # History status
-  for ($i = 0; $i < $data['num_days']; $i++) {
-    $columnDate = date('Y-m-d', time() - $i * (60 * 60 * 24));
+  for ($i = 0; $i < $data['num_cells']; $i++) {
+    $columnDate = date('Y-m-d', time() - $i * (60 * $data['hour_interval'] * $data['minute_interval']));
+    $columnHour = date('H', time() - $i * (60 * $data['hour_interval'] * $data['minute_interval']));
+    $columnMinute = date('m', time() - $i * (60 * $data['hour_interval'] * $data['minute_interval']));
     $statusValue = $data['value_empty_show'] == Widget::YRZ_SH_ON ? $data['value_empty_text'] : '';
     $statusColor = $data['base_color'];
 
     foreach ($item as $itemStatus) {
-      if (isset($itemStatus['day'])) {
-        if ($itemStatus['day'] == $columnDate) {
+      if (isset($itemStatus['date'])) {
+        if ($columnDate == $itemStatus['date'] AND $columnHour >= $itemStatus['startHour'] && $columnHour < $itemStatus['endHour']
+        AND $columnMinute >= $itemStatus['startMinute'] && $columnMinute < $itemStatus['endMinute']) {
           $statusValue = round(floatval($itemStatus['value']), $data['value_digits']);
           $lastThreshold = null;
           foreach ($data['thresholds'] as $threshold) {
@@ -110,17 +113,29 @@ foreach ($data['items'] as $item) {
 }
 
 # Date (if activated)
-if ($data['show_date'] == Widget::YRZ_SH_ON) {
-  for ($i = 0; $i < $data['num_days']; $i++) {
-    $dateOfTheDay = date('d/m', time() - $i * (60 * 60 * 24));
-    $dayOfTheWeek = date('D', time() - $i * (60 * 60 * 24));
+if ($data['show_date'] != Widget::YRZ_SH_SHOW_DATE_NONE) {
+  for ($i = 0; $i < $data['num_cells']; $i++) {
+    $dateDate = date('d/m', time() - $i * (60 * $data['hour_interval'] * $data['minute_interval']));
+    $dateTime = date('H:m', time() - $i * (60 * $data['hour_interval'] * $data['minute_interval']));
+    $dateDay = date('D', time() - $i * (60 * $data['hour_interval'] * $data['minute_interval']));
 
     $dateToShow = '';
-    if ($data['date_format'] == Widget::YRZ_SH_DATE_FORMAT_ALL || $dayOfTheWeek == 'Mon') {
+    if ($data['show_date'] == Widget::YRZ_SH_SHOW_DATE_ALL && $data['hour_interval'] != 24) {
       $dateToShow = [
-        new CTag('b', true, _($dayOfTheWeek)),
+        new CTag('b', true, _($dateDay)),
         NBSP(),
-        $dateOfTheDay
+        $dateDate,
+        ', ',
+        $dateTime
+      ];
+    }
+    else if ($data['show_date'] == Widget::YRZ_SH_SHOW_DATE_ALL && $data['hour_interval'] == 24
+    || $data['show_date'] == Widget::YRZ_SH_SHOW_DATE_DAILY && $dateDay != date('D', time() - ($i + 1) * (60 * $data['hour_interval'] * $data['minute_interval']))
+    || $data['show_date'] == Widget::YRZ_SH_SHOW_DATE_WEEKLY && $dateDay == 'Mon' && $dateDay != date('D', time() - ($i + 1) * (60 * $data['hour_interval'] * $data['minute_interval']))) {
+      $dateToShow = [
+        new CTag('b', true, _($dateDay)),
+        NBSP(),
+        $dateDate
       ];
     }
 

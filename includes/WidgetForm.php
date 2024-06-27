@@ -28,7 +28,7 @@ ini_set("display_errors", 1);
 
 class WidgetForm extends CWidgetForm {
 
-  private const DEFAULT_NUM_DAYS = 7;
+  private const DEFAULT_NUM_CELLS = 7;
   private const DEFAULT_BASE_COLOR = '202020';
   private const DEFAULT_CELL_WIDTH = 20;
   private const DEFAULT_CELL_HEIGHT = 20;
@@ -45,9 +45,22 @@ class WidgetForm extends CWidgetForm {
           ->setFlags(CWidgetField::FLAG_NOT_EMPTY | CWidgetField::FLAG_LABEL_ASTERISK)
       )
       ->addField(
-        (new CWidgetFieldIntegerBox('num_days', _('Number of days')))
-          ->setDefault(self::DEFAULT_NUM_DAYS)
+        (new CWidgetFieldIntegerBox('num_cells', _('Number of values')))
+          ->setDefault(self::DEFAULT_NUM_CELLS)
           ->setFlags(CWidgetField::FLAG_NOT_EMPTY | CWidgetField::FLAG_LABEL_ASTERISK)
+      )
+      ->addField(
+        (new CWidgetFieldSelect('search_interval', '', [
+          Widget::YRZ_SH_SEARCH_INTERVAL_1D => _('1 day'),
+          Widget::YRZ_SH_SEARCH_INTERVAL_12H => _('12 hours'),
+          Widget::YRZ_SH_SEARCH_INTERVAL_6H => _('6 hours'),
+          Widget::YRZ_SH_SEARCH_INTERVAL_3H => _('3 hours'),
+          Widget::YRZ_SH_SEARCH_INTERVAL_1H => _('1 hour'),
+          Widget::YRZ_SH_SEARCH_INTERVAL_30MIN => _('30 minutes'),
+          Widget::YRZ_SH_SEARCH_INTERVAL_15MIN => _('15 minutes'),
+          Widget::YRZ_SH_SEARCH_INTERVAL_5MIN => _('5 minutes')
+        ]))
+          ->setDefault(Widget::YRZ_SH_SEARCH_INTERVAL_1D)
       )
       ->addField(
         (new CWidgetFieldSelect('agg_func', _('Aggregation function'), [
@@ -140,15 +153,13 @@ class WidgetForm extends CWidgetForm {
           ->setDefault(Widget::YRZ_SH_CELL_ALIGN_CENTER)
       )
       ->addField(
-        (new CWidgetFieldCheckBox('show_date', _('Show timestamp')))
-          ->setDefault(Widget::YRZ_SH_ON)
-      )
-      ->addField(
-        (new CWidgetFieldRadioButtonList('date_format', _('Date format'), [
-          Widget::YRZ_SH_DATE_FORMAT_ALL => _('All'),
-          Widget::YRZ_SH_DATE_FORMAT_WEEKLY => _('Weekly')
+        (new CWidgetFieldRadioButtonList('show_date', _('Show timestamp'), [
+          Widget::YRZ_SH_SHOW_DATE_ALL => _('All'),
+          Widget::YRZ_SH_SHOW_DATE_DAILY => _('Daily'),
+          Widget::YRZ_SH_SHOW_DATE_WEEKLY => _('Weekly'),
+          Widget::YRZ_SH_SHOW_DATE_NONE => _('None')
         ]))
-          ->setDefault(Widget::YRZ_SH_DATE_FORMAT_WEEKLY)
+          ->setDefault(Widget::YRZ_SH_SHOW_DATE_WEEKLY)
       )
       ->addField(
         (new CWidgetFieldCheckBox('color_interval', _('Threshold interval')))
