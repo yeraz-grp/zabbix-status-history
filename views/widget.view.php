@@ -118,6 +118,7 @@ if ($data['show_date'] != Widget::YRZ_SH_SHOW_DATE_NONE) {
     $dateDate = date('d/m', time() - $i * (60 * $data['hour_interval'] * $data['minute_interval']));
     $dateTime = date('H:m', time() - $i * (60 * $data['hour_interval'] * $data['minute_interval']));
     $dateDay = date('D', time() - $i * (60 * $data['hour_interval'] * $data['minute_interval']));
+    $previousDateDay = date('D', time() - ($i + 1) * (60 * $data['hour_interval'] * $data['minute_interval']));
 
     $dateToShow = '';
     if ($data['show_date'] == Widget::YRZ_SH_SHOW_DATE_ALL && $data['hour_interval'] != 24) {
@@ -130,8 +131,8 @@ if ($data['show_date'] != Widget::YRZ_SH_SHOW_DATE_NONE) {
       ];
     }
     else if ($data['show_date'] == Widget::YRZ_SH_SHOW_DATE_ALL && $data['hour_interval'] == 24
-    || $data['show_date'] == Widget::YRZ_SH_SHOW_DATE_DAILY && $dateDay != date('D', time() - ($i + 1) * (60 * $data['hour_interval'] * $data['minute_interval']))
-    || $data['show_date'] == Widget::YRZ_SH_SHOW_DATE_WEEKLY && $dateDay == 'Mon' && $dateDay != date('D', time() - ($i + 1) * (60 * $data['hour_interval'] * $data['minute_interval']))) {
+    || $data['show_date'] == Widget::YRZ_SH_SHOW_DATE_DAILY && $dateDay != $previousDateDay
+    || $data['show_date'] == Widget::YRZ_SH_SHOW_DATE_WEEKLY && $dateDay == 'Mon' && $dateDay != $previousDateDay) {
       $dateToShow = [
         new CTag('b', true, _($dateDay)),
         NBSP(),

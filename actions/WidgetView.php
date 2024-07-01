@@ -103,11 +103,20 @@ class WidgetView extends CControllerDashboardWidgetView {
           $queryType = $this->fields_values['agg_func'] == Widget::YRZ_SH_AGG_FUNC_MIN ? 'MIN(value)' :
           ($this->fields_values['agg_func'] == Widget::YRZ_SH_AGG_FUNC_MAX ? 'MAX(value)' : 'AVG(value)');
           $dbQuery = DBselect(
-            'SELECT '.$queryType.' AS value, DATE(FROM_UNIXTIME(clock)) AS date'.
-            ' FROM '.$tables[$item['value_type']].
-            ' WHERE itemid = '.$item['itemid'].
-            ' GROUP BY date'.
-            ' ORDER BY date DESC;'
+            'SELECT '.$queryType.' AS value, DATE(FROM_UNIXTIME(clock)) AS date,'.
+            ' FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.') * '.$hourInterval.' AS startHour,'.
+            ' (FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.') * '.$hourInterval.') + '.$hourInterval.' AS endHour,'.
+            ' FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.') * '.$minuteInterval.' AS startMinute,'.
+            ' (FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.') * '.$minuteInterval.') + '.$minuteInterval.' AS endMinute'.
+            ' FROM ('.
+              ' SELECT value, clock,'.
+                ' ROW_NUMBER() OVER (PARTITION BY DATE(FROM_UNIXTIME(clock)), FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.'),'.
+                ' FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.') ORDER BY clock DESC)'.
+              ' FROM '.$tables[$item['value_type']].
+              ' WHERE itemid = '.$item['itemid'].
+            ' ) sub'.
+            ' GROUP BY date, FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.'), FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.')'.
+            ' ORDER BY FROM_UNIXTIME(clock) DESC'
           );
         }
 
