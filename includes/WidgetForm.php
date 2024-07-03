@@ -141,6 +141,10 @@ class WidgetForm extends CWidgetForm {
           ->setDefault(self::DEFAULT_VALUE_EMPTY_TEXT)
       )
       ->addField(
+        (new CWidgetFieldCheckBox('show_units', _('Show units')))
+          ->setDefault(Widget::YRZ_SH_OFF)
+      )
+      ->addField(
         (new CWidgetFieldIntegerBox('value_digits', _('Fraction digits')))
           ->setDefault(self::DEFAULT_VALUE_DIGITS)
       )

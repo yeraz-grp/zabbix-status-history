@@ -90,6 +90,9 @@ $form
             (new CFormField([$value_empty_checkbox->getView(), $value_empty_field->getView()]))
           ])
           ->addField(
+            new CWidgetFieldCheckBoxView($data['fields']['show_units'])
+          )
+          ->addField(
             new CWidgetFieldIntegerBoxView($data['fields']['value_digits'])
           )
           ->addField(
@@ -101,7 +104,6 @@ $form
           ->addField(
             new CWidgetFieldRadioButtonListView($data['fields']['show_date'])
           )
-          // Date format?
           ->addItem(
             new CTag('hr')
           )

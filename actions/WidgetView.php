@@ -83,17 +83,18 @@ class WidgetView extends CControllerDashboardWidgetView {
         $this->fields_values['agg_func'] == Widget::YRZ_SH_AGG_FUNC_LAST) {
           $orderBy = $this->fields_values['agg_func'] == Widget::YRZ_SH_AGG_FUNC_FIRST ? 'ASC' : 'DESC';
           $dbQuery = DBselect(
-            'SELECT value, DATE(FROM_UNIXTIME(clock)) AS date,'.
+            'SELECT value, units, DATE(FROM_UNIXTIME(clock)) AS date,'.
             ' FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.') * '.$hourInterval.' AS startHour,'.
             ' (FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.') * '.$hourInterval.') + '.$hourInterval.' AS endHour,'.
             ' FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.') * '.$minuteInterval.' AS startMinute,'.
             ' (FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.') * '.$minuteInterval.') + '.$minuteInterval.' AS endMinute'.
             ' FROM ('.
-              ' SELECT value, clock,'.
+              ' SELECT value, units, clock,'.
                 ' ROW_NUMBER() OVER (PARTITION BY DATE(FROM_UNIXTIME(clock)), FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.'),'.
                 ' FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.') ORDER BY clock '.$orderBy.') AS rn'.
               ' FROM '.$tables[$item['value_type']].
-              ' WHERE itemid = '.$item['itemid'].
+              ' INNER JOIN items ON '.$tables[$item['value_type']].'.itemid = items.itemid'.
+              ' WHERE '.$tables[$item['value_type']].'.itemid = '.$item['itemid'].
               ' ) sub'.
             ' WHERE rn = 1'.
             ' ORDER BY FROM_UNIXTIME(clock) DESC;'
@@ -103,17 +104,18 @@ class WidgetView extends CControllerDashboardWidgetView {
           $queryType = $this->fields_values['agg_func'] == Widget::YRZ_SH_AGG_FUNC_MIN ? 'MIN(value)' :
           ($this->fields_values['agg_func'] == Widget::YRZ_SH_AGG_FUNC_MAX ? 'MAX(value)' : 'AVG(value)');
           $dbQuery = DBselect(
-            'SELECT '.$queryType.' AS value, DATE(FROM_UNIXTIME(clock)) AS date,'.
+            'SELECT '.$queryType.' AS value, units, DATE(FROM_UNIXTIME(clock)) AS date,'.
             ' FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.') * '.$hourInterval.' AS startHour,'.
             ' (FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.') * '.$hourInterval.') + '.$hourInterval.' AS endHour,'.
             ' FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.') * '.$minuteInterval.' AS startMinute,'.
             ' (FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.') * '.$minuteInterval.') + '.$minuteInterval.' AS endMinute'.
             ' FROM ('.
-              ' SELECT value, clock,'.
+              ' SELECT value, units, clock,'.
                 ' ROW_NUMBER() OVER (PARTITION BY DATE(FROM_UNIXTIME(clock)), FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.'),'.
                 ' FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.') ORDER BY clock DESC)'.
               ' FROM '.$tables[$item['value_type']].
-              ' WHERE itemid = '.$item['itemid'].
+              ' INNER JOIN items ON '.$tables[$item['value_type']].'.itemid = items.itemid'.
+              ' WHERE '.$tables[$item['value_type']].'.itemid = '.$item['itemid'].
             ' ) sub'.
             ' GROUP BY date, FLOOR(HOUR(FROM_UNIXTIME(clock)) / '.$hourInterval.'), FLOOR(MINUTE(FROM_UNIXTIME(clock)) / '.$minuteInterval.')'.
             ' ORDER BY FROM_UNIXTIME(clock) DESC'
@@ -151,6 +153,7 @@ class WidgetView extends CControllerDashboardWidgetView {
       'show_value' => $this->fields_values['show_value'],
       'value_empty_show' => $this->fields_values['value_empty_show'],
       'value_empty_text' => $this->fields_values['value_empty_text'],
+      'show_units' => $this->fields_values['show_units'],
       'value_digits' => $this->fields_values['value_digits'],
       'cell_align' => $this->fields_values['cell_align'],
       'show_date' => $this->fields_values['show_date'],

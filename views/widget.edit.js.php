@@ -11,6 +11,7 @@ window.widget_yrz_status_history_form = new class {
     this._showValue = document.getElementById('show_value');
     this._valueEmptyShow = document.getElementById('value_empty_show');
     this._valueEmptyText = document.getElementById('value_empty_text');
+    this._showUnits = document.getElementById('show_units');
     this._valueDigits = document.getElementById('value_digits');
     this._showDate = document.getElementById('show_date');
     this._colorInterval = document.getElementById('color_interval');
@@ -83,6 +84,7 @@ window.widget_yrz_status_history_form = new class {
     }
     this._valueEmptyShow.disabled = !this._showValue.checked;
     this._valueDigits.disabled = !this._showValue.checked;
+    this._showUnits.disabled = !this._showValue.checked;
 
     this._valueEmptyText.disabled = !this._showValue.checked || !this._valueEmptyShow.checked;
 

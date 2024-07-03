@@ -72,7 +72,9 @@ foreach ($data['items'] as $item) {
       if (isset($itemStatus['date'])) {
         if ($columnDate == $itemStatus['date'] AND $columnHour >= $itemStatus['startHour'] && $columnHour < $itemStatus['endHour']
         AND $columnMinute >= $itemStatus['startMinute'] && $columnMinute < $itemStatus['endMinute']) {
-          $statusValue = round(floatval($itemStatus['value']), $data['value_digits']);
+          $statusValue = $data['show_units'] == Widget::YRZ_SH_ON ?
+          round(floatval($itemStatus['value']), $data['value_digits']).$itemStatus['units'] :
+          round(floatval($itemStatus['value']), $data['value_digits']);
           $lastThreshold = null;
           foreach ($data['thresholds'] as $threshold) {
             if ($itemStatus['value'] == $threshold['threshold'] || (
