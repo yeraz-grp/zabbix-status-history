@@ -2,11 +2,11 @@
   "manifest_version": 2.0,
   "id": "yrz_status_history",
   "type": "widget",
-  "name": "Yeraz | Status History",
+  "name": "Status History",
   "description": "Displays the backup status history from a specific length of days from a specified item list.",
   "namespace": "YrzStatusHistory",
   "version": "1.0",
-  "author": "Alex P.",
+  "author": "Alex PINEAU",
   "actions": {
     "widget.yrz_status_history.view": {
       "class": "WidgetView"

@@ -46,7 +46,7 @@ class Widget extends CWidget {
   public const YRZ_SH_LEGEND_LAYOUT_LIST = 1;
 
 	public function getDefaultName(): string {
-		return _('Yeraz | Status History');
+		return _('Status History');
 	}
   
 }

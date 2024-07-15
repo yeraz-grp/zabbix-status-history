@@ -22,6 +22,8 @@ use Modules\YrzStatusHistory\{
   CWidgetFieldYrzShThresholds
 };
 
+bindtextdomain('status_history', 'modules/status_history/locale');
+
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 // die('ded');
@@ -39,7 +41,10 @@ class WidgetForm extends CWidgetForm {
   private const DEFAULT_VALUE_DIGITS = 2;
 
   public function addFields(): self {
-    return $this
+    $td = textdomain(null);
+    textdomain('status_history');
+
+    $ret =  $this
       ->addField(
         (new CWidgetFieldMultiSelectItem('itemid', _('Items')))
           ->setFlags(CWidgetField::FLAG_NOT_EMPTY | CWidgetField::FLAG_LABEL_ASTERISK)
@@ -51,14 +56,14 @@ class WidgetForm extends CWidgetForm {
       )
       ->addField(
         (new CWidgetFieldSelect('search_interval', '', [
-          Widget::YRZ_SH_SEARCH_INTERVAL_1D => _('1 day'),
-          Widget::YRZ_SH_SEARCH_INTERVAL_12H => _('12 hours'),
-          Widget::YRZ_SH_SEARCH_INTERVAL_6H => _('6 hours'),
-          Widget::YRZ_SH_SEARCH_INTERVAL_3H => _('3 hours'),
-          Widget::YRZ_SH_SEARCH_INTERVAL_1H => _('1 hour'),
-          Widget::YRZ_SH_SEARCH_INTERVAL_30MIN => _('30 minutes'),
-          Widget::YRZ_SH_SEARCH_INTERVAL_15MIN => _('15 minutes'),
-          Widget::YRZ_SH_SEARCH_INTERVAL_5MIN => _('5 minutes')
+          Widget::YRZ_SH_SEARCH_INTERVAL_1D => _n('%1$s day', '$1$s days', 1),
+          Widget::YRZ_SH_SEARCH_INTERVAL_12H => _n('%1$s hour', '$1$s hours', 12),
+          Widget::YRZ_SH_SEARCH_INTERVAL_6H => _n('%1$s hour', '$1$s hours', 6),
+          Widget::YRZ_SH_SEARCH_INTERVAL_3H => _n('%1$s hour', '$1$s hours', 3),
+          Widget::YRZ_SH_SEARCH_INTERVAL_1H => _n('%1$s hour', '$1$s hours', 1),
+          Widget::YRZ_SH_SEARCH_INTERVAL_30MIN => _n('%1$s minute', '$1$s minutes', 30),
+          Widget::YRZ_SH_SEARCH_INTERVAL_15MIN => _n('%1$s minute', '$1$s minutes', 15),
+          Widget::YRZ_SH_SEARCH_INTERVAL_5MIN => _n('%1$s minute', '$1$s minutes', 5)
         ]))
           ->setDefault(Widget::YRZ_SH_SEARCH_INTERVAL_1D)
       )
@@ -188,5 +193,7 @@ class WidgetForm extends CWidgetForm {
         ]))
           ->setDefault(Widget::YRZ_SH_LEGEND_LAYOUT_TABLE)
       );
+      textdomain($td);
+      return $ret;
   }
 }

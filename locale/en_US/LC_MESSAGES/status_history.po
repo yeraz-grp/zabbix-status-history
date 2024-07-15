@@ -1,0 +1,215 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Status History Widget 1.0\n"
+"POT-Creation-Date: 2024-07-11 11:59+0200\n"
+"PO-Revision-Date: 2024-07-11 11:59+0200\n"
+"Last-Translator: Alex PINEAU\n"
+"Language-Team: Yeraz\n"
+"Language: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Source-Language: en\n"
+"X-Generator: PO File Editor https://pofile.net/free-po-editor\n"
+
+msgid "Show header"
+msgstr "Show header"
+
+msgid "Add widget"
+msgstr "Add widget"
+
+msgid "Edit widget"
+msgstr "Edit widget"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Items"
+msgstr "Items"
+
+msgid "Select"
+msgstr "Select"
+
+msgid "Number of values"
+msgstr "Number of values"
+
+msgid "with an interval of"
+msgstr "with an interval of"
+
+msgid "Aggregation function"
+msgstr "Aggregation function"
+
+msgid "Base color"
+msgstr "Base color"
+
+msgid "Thresholds"
+msgstr "Thresholds"
+
+msgid "Threshold"
+msgstr "Threshold"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Cells width"
+msgstr "Cells width"
+
+msgid "Cells height"
+msgstr "Cells height"
+
+msgid "Horizontal gap"
+msgstr "Horizontal gap"
+
+msgid "Vertical gap"
+msgstr "Verticap gap"
+
+msgid "Labels"
+msgstr "Labels"
+
+msgid "Show"
+msgstr "Show"
+
+msgid "Alignment"
+msgstr "Alignment"
+
+msgid "Width"
+msgstr "Width"
+
+msgid "Status cells"
+msgstr "Status cells"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Order"
+msgstr "Order"
+
+msgid "Show value"
+msgstr "Show value"
+
+msgid "Text if no value"
+msgstr "Text if no value"
+
+msgid "Show units"
+msgstr "Show units"
+
+msgid "Fraction digits"
+msgstr "Fraction digits"
+
+msgid "Show timestamp"
+msgstr "Show timestamp"
+
+msgid "Threshold interval"
+msgstr "Threshold interval"
+
+msgid "Color interpolation"
+msgstr "Color interpolation"
+
+msgid "Exceed min/max threshold"
+msgstr "Exceed min/max threshold"
+
+msgid "Legend"
+msgstr "Legend"
+
+msgid "Show"
+msgstr "Show"
+
+msgid "Layout"
+msgstr "Layout"
+
+msgid "Advanced configuration"
+msgstr "Advanced configuration"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Optional"
+msgstr "Optional"
+
+msgid "%1$s day"
+msgid_plural "%1$s days"
+msgstr[0] "%1$s day"
+msgstr[1] "%1$s days"
+
+msgid "%1$s hour"
+msgid_plural "%1$s hours"
+msgstr[0] "%1$s hour"
+msgstr[1] "%1$s hours"
+
+msgid "%1$s minute"
+msgid_plural "%1$s minutes"
+msgstr[0] "%1$s minute"
+msgstr[1] "%1$s minutes"
+
+msgid "first"
+msgstr "first"
+
+msgid "last"
+msgstr "last"
+
+msgid "min"
+msgstr "min"
+
+msgid "max"
+msgstr "max"
+
+msgid "avg"
+msgstr "avg"
+
+msgid "Left"
+msgstr "Left"
+
+msgid "Center"
+msgstr "Center"
+
+msgid "Right"
+msgstr "Right"
+
+msgid "Newest first"
+msgstr "Newest first"
+
+msgid "Oldest first"
+msgstr "Oldest first"
+
+msgid "All"
+msgstr "All"
+
+msgid "Daily"
+msgstr "Daily"
+
+msgid "Weekly"
+msgstr "Weekly"
+
+msgid "None"
+msgstr "None"
+
+msgid "Table"
+msgstr "Table"
+
+msgid "List"
+msgstr "List"
+
+msgid "If set to 0, the width will be set on auto."
+msgstr "If set to 0, the width will be set on auto."
+
+msgid "If the value of the cell is between 2 thresholds, it will set the color of the previous threshold in the interval."
+msgstr "If the value of the cell is between 2 thresholds, it will set the color of the previous threshold in the interval."
+
+msgid "If activated, it replace the color interval with a color interpolation between the two thresholds colors."
+msgstr "If activated, it replace the color interval with a color interpolation between the two thresholds colors."
+
+msgid "If the value is below the lowest threshold or higher than the highest threshold, the color of said threshold will be set rather than setting the default color."
+msgstr "If the value is below the lowest threshold or higher than the highest threshold, the color of said threshold will be set rather than setting the default color."
+
+msgid "Apply"
+msgstr "Apply"

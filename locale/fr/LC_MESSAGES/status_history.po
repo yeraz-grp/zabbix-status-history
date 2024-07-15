@@ -1,0 +1,215 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Status History Widget 1.0\n"
+"POT-Creation-Date: 2024-07-11 11:59+0200\n"
+"PO-Revision-Date: 2024-07-11 11:59+0200\n"
+"Last-Translator: Alex PINEAU\n"
+"Language-Team: Yeraz\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Source-Language: en\n"
+"X-Generator: PO File Editor https://pofile.net/free-po-editor\n"
+
+msgid "Show header"
+msgstr "Afficher l'en-tête"
+
+msgid "Add widget"
+msgstr "Ajouter un widget"
+
+msgid "Edit widget"
+msgstr "Éditer un widget"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Items"
+msgstr "Éléments"
+
+msgid "Select"
+msgstr "Sélectionner"
+
+msgid "Number of values"
+msgstr "Nombre de valeurs"
+
+msgid "with an interval of"
+msgstr "dans un intervalle de"
+
+msgid "Aggregation function"
+msgstr "Fonction d'agrégation"
+
+msgid "Base color"
+msgstr "Couleur de base"
+
+msgid "Thresholds"
+msgstr "Seuils"
+
+msgid "Threshold"
+msgstr "Seuil"
+
+msgid "Text"
+msgstr "Texte"
+
+msgid "Cells width"
+msgstr "Longueur des cellules"
+
+msgid "Cells height"
+msgstr "Hauteur des cellules"
+
+msgid "Horizontal gap"
+msgstr "Écart hozirontal"
+
+msgid "Vertical gap"
+msgstr "Écart vertical"
+
+msgid "Labels"
+msgstr "Libellés"
+
+msgid "Show"
+msgstr "Afficher"
+
+msgid "Alignment"
+msgstr "Alignement"
+
+msgid "Width"
+msgstr "Longueur"
+
+msgid "Status cells"
+msgstr "Cellules des états"
+
+msgid "Position"
+msgstr "Position"
+
+msgid "Order"
+msgstr "Ordre"
+
+msgid "Show value"
+msgstr "Afficher valeur"
+
+msgid "Text if no value"
+msgstr "Texte si aucune valeur"
+
+msgid "Show units"
+msgstr "Afficher les unités"
+
+msgid "Fraction digits"
+msgstr "Décimales"
+
+msgid "Show timestamp"
+msgstr "Afficher l'horaire"
+
+msgid "Threshold interval"
+msgstr "Intervalle entre seuils"
+
+msgid "Color interpolation"
+msgstr "Interpolation des couleurs"
+
+msgid "Exceed min/max threshold"
+msgstr "Dépassement des seuils min/max"
+
+msgid "Legend"
+msgstr "Légende"
+
+msgid "Show"
+msgstr "Afficher"
+
+msgid "Layout"
+msgstr "Disposition"
+
+msgid "Advanced configuration"
+msgstr "Configuration avancée"
+
+msgid "Action"
+msgstr "Action"
+
+msgid "Add"
+msgstr "Ajouter"
+
+msgid "Remove"
+msgstr "Supprimer"
+
+msgid "Optional"
+msgstr "Optionnel"
+
+msgid "%1$s day"
+msgid_plural "%1$s days"
+msgstr[0] "%1$s jour"
+msgstr[1] "%1$s jours"
+
+msgid "%1$s hour"
+msgid_plural "%1$s hours"
+msgstr[0] "%1$s heure"
+msgstr[1] "%1$s heures"
+
+msgid "%1$s minute"
+msgid_plural "%1$s minutes"
+msgstr[0] "%1$s minute"
+msgstr[1] "%1$s minutes"
+
+msgid "first"
+msgstr "premier"
+
+msgid "last"
+msgstr "dernier"
+
+msgid "min"
+msgstr "min"
+
+msgid "max"
+msgstr "max"
+
+msgid "avg"
+msgstr "moy"
+
+msgid "Left"
+msgstr "Gauche"
+
+msgid "Center"
+msgstr "Centre"
+
+msgid "Right"
+msgstr "Droite"
+
+msgid "Newest first"
+msgstr "Plus récent en premier"
+
+msgid "Oldest first"
+msgstr "Plus ancien en premier"
+
+msgid "All"
+msgstr "Tous"
+
+msgid "Daily"
+msgstr "Journalier"
+
+msgid "Weekly"
+msgstr "Hebdomadaire"
+
+msgid "None"
+msgstr "Aucun"
+
+msgid "Table"
+msgstr "Table"
+
+msgid "List"
+msgstr "Liste"
+
+msgid "If set to 0, the width will be set on auto."
+msgstr "Si mis à 0, la longueur sera défini sur auto."
+
+msgid "If the value of the cell is between 2 thresholds, it will set the color of the previous threshold in the interval."
+msgstr "Si la valeur de la cellule se trouve entre 2 seuils, cela mettra la couleur du seuil précédent dans l'intervalle."
+
+msgid "If activated, it replace the color interval with a color interpolation between the two thresholds colors."
+msgstr "Si activé, cela remplace la couleur de l'intervalle avec une interpolation des couleurs entre les 2 couleurs des seuils."
+
+msgid "If the value is below the lowest threshold or higher than the highest threshold, the color of said threshold will be set rather than setting the default color."
+msgstr "Si la valeur se trouve en dessous du seuil le plus bas ou au dessus du seuil le plus élevé, la couleur du seuil concerné sera utilisé à la place de la couleur de base."
+
+msgid "Apply"
+msgstr "Appliquer"

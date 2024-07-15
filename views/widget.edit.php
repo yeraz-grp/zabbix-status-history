@@ -2,6 +2,10 @@
 
 use Modules\YrzStatusHistory\CWidgetFieldYrzShThresholdsView;
 
+bindtextdomain('status_history', 'modules/status_history/locale');
+$td = textdomain(null);
+textdomain('status_history');
+
 $form = new CWidgetFormView($data);
 
 $num_cells_field = $form->registerField(new CWidgetFieldIntegerBoxView($data['fields']['num_cells']));
@@ -146,3 +150,5 @@ $form
 		'thresholds' => ($data['fields']['thresholds'])->getValue()
 	], JSON_THROW_ON_ERROR).');')
   ->show();
+
+textdomain($td);
