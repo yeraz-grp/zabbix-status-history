@@ -24,10 +24,6 @@ use Modules\YrzStatusHistory\{
 
 bindtextdomain('status_history', 'modules/status_history/locale');
 
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-// die('ded');
-
 class WidgetForm extends CWidgetForm {
 
   private const DEFAULT_NUM_CELLS = 7;

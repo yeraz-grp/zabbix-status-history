@@ -2,10 +2,6 @@
 
 use Modules\YrzStatusHistory\Widget;
 
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
-// die('ded');
-
 # Setting values
 $cellWidth = $data['cell_width'].'px';
 $cellHeight = $data['cell_height'].'px';
